@@ -3,7 +3,10 @@ import sys
 menu_list = ["1. do something cool", "2. be cool", \
 "3. get outta da way"]
 
-def menu() :
+response_list = ["   Do something cool?", "   Be cool?", \
+"   Get outta da way?"]
+
+def menu_header() :
     """
     return the menu header as a string
     """
@@ -30,5 +33,27 @@ def selection(x) :
     """
     return menu_list[x]
     
-print menu()
-print selection(get_input(sys.stdin) - 1) # zero base it
+def get_response(x) :
+    """
+    x is the integer index for the response_list
+    
+    return the item inside the response_list that the user selected
+    """
+    return response_list[x]
+    
+def menu() :
+    """
+    the driver for the menu
+    """
+    print menu_header()
+    input = get_input(sys.stdin)
+    input -= 1 # zero base it
+    print get_response(input)
+    if input == 1 :
+        print "You chose " + selection(input)
+    elif input == 2 :
+        print "   Back off, punk!"
+    
+    
+    
+menu()
