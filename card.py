@@ -14,3 +14,11 @@ class card :
         suits = ['Clubs', 'Diamonds', 'Spades', 'Hearts']
         result += suits[self.suit]
         return result
+    
+    def __cmp__ (self, other, suit_rank=[]) :
+        if self.rank < other.rank :
+            return -1
+        elif self.rank > other.rank :
+            return 1
+        else :
+            return 0
