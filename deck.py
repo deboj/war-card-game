@@ -3,15 +3,17 @@ from collections import deque
 import random # shuffle
 
 class deck :
-    def __init__ (self) :
+    def __init__ (self, n=1) :
         """
         the constructor for deck
         adds all 52 cards to its cards array
+        n decks
         """
         self.cards = deque()
-        for i in xrange(4) :
-            for j in xrange(2, 15) :
-                self.cards.append(card(j, i))
+        for d in xrange(n) :
+            for i in xrange(4) :
+                for j in xrange(2, 15) :
+                    self.cards.append(card(j, i))
     
     def print_deck (self) :
         """
