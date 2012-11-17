@@ -10,6 +10,7 @@ class deck :
         n decks
         """
         self.cards = deque()
+        #supports multiple decks
         for d in xrange(n) :
             for i in xrange(4) :
                 for j in xrange(2, 15) :

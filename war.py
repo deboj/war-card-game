@@ -2,10 +2,11 @@ from deck import deck
 from card import card
 import random
 import sys
+import time
 
 
 
-def war(n=1, verbose=False) :
+def war(n=1, verbose=False, stagger=False) :
     x = deck(n)
     y = deck(n)
     x.shuffle()
@@ -31,7 +32,9 @@ def war(n=1, verbose=False) :
         else :
             #battle
             if verbose :
-                print "battle!" 
+                print "\nBATTLE!" 
+            if stagger :
+                time.sleep(1.3)
             won = False
             victory_list = [cx, cy]
             while not won :
@@ -46,6 +49,8 @@ def war(n=1, verbose=False) :
                 victory_list += (stake_x + stake_y + [vx, vy])
                 if verbose :
                     print "\t" + str(vx) + " versus " + str(vy) 
+                if stagger :
+                    time.sleep(.65)
                 if vx > vy :
                     random.shuffle(victory_list)
                     if verbose :
@@ -58,6 +63,10 @@ def war(n=1, verbose=False) :
                     random.shuffle(victory_list)
                     y.add_all(victory_list)
                     won = True
+            if stagger :
+                time.sleep(.65)
+        if stagger :
+            time.sleep(.65)
     if len(x) :
         print "x wins!"
     elif len(y) :
@@ -65,13 +74,18 @@ def war(n=1, verbose=False) :
     else :
         print "tie??"
         
-n = 1
+
 verbose = False
-if len(sys.argv) > 1 :
-    if sys.argv[1].lower() in ["v","-v","--v"] :
-        if len(sys.argv) > 2 :
-            n = int(sys.argv[2])
-        verbose = True
-    else :
-        n = int(sys.argv[1])
-war(n, verbose)
+stagger = False
+
+if "-v" in sys.argv :
+    verbose = True
+if "-s" in sys.argv :
+    stagger = True
+
+try :
+    n = int(sys.argv[[verbose,stagger].count(True)+1])
+except :
+    n = 1
+
+war(n, verbose, stagger)
